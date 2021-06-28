@@ -1,0 +1,24 @@
+cloud:
+  aws:
+    credentials:
+      access-key: ASIA2533TSC3EM46KG46
+      secret-key: g4aJKLFOUd/LnbxT7a1IPO9BqFnlus0aB4frIRXL
+    region:
+      static: eu-west-1
+    stack:
+      auto: false
+
+application:
+  bucket:
+    name: jack.intern.test
+
+spring:
+  servlet:
+    multipart:
+      enabled: true
+      file-size-threshold: 2MB
+      max-file-size: 5MB
+      max-request-size: 10MB
+
+server:
+  port:9090
