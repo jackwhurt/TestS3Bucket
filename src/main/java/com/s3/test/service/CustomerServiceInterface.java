@@ -6,6 +6,11 @@ import org.springframework.stereotype.Service;
 
 import java.util.List;
 
-public interface ICustomerService {
+public interface CustomerServiceInterface {
+
     List<Customer> findAll();
+    List<Customer> insertCustomers(List<Customer> myCustomers);
+    String deleteCustomerById(String customer_id);
+    String updateCustomer(List<Customer> myCustomers);
+
 }

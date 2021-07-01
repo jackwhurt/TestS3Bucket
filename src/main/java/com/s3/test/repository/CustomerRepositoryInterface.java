@@ -11,7 +11,7 @@ import org.springframework.stereotype.Repository;
 import java.util.List;
 
 @Repository
-public interface CustomerRepositoryInterface extends JpaRepository<Customer, Integer> {
+public interface CustomerRepositoryInterface extends JpaRepository<Customer, String> {
 
     //List<Customer> finContactNamedBy(String contact_name);
     //List<Customer> findAll();

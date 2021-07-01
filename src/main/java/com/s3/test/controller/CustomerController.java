@@ -1,16 +1,10 @@
 package com.s3.test.controller;
 
 import com.s3.test.model.Customer;
-import com.s3.test.repository.CustomerRepositoryInterface;
-import com.s3.test.service.CustomerService;
-import com.s3.test.service.ICustomerService;
+import com.s3.test.service.CustomerServiceInterface;
+import net.minidev.json.JSONObject;
 import org.springframework.beans.factory.annotation.Autowired;
-import org.springframework.beans.factory.annotation.Qualifier;
-import org.springframework.stereotype.Controller;
-import org.springframework.ui.Model;
-import org.springframework.web.bind.annotation.GetMapping;
-import org.springframework.web.bind.annotation.RequestMapping;
-import org.springframework.web.bind.annotation.RestController;
+import org.springframework.web.bind.annotation.*;
 
 import java.util.List;
 
@@ -21,16 +15,36 @@ public class CustomerController {
     public CustomerController() {}
 
     @Autowired
-    private ICustomerService customerService;
+    private CustomerServiceInterface customerService;
 
     @GetMapping("/showCustomers")
-    public List<Customer> findAll(Model model) {
+    public List<Customer> findAll() {
 
-        List<Customer> customers = (List<Customer>) customerService.findAll();
-
-        model.addAttribute("customers", customers);
-
-        return customers;
+        return (List<Customer>) customerService.findAll();
 
     }
+
+    @PostMapping("/addCustomers")
+    public List<Customer> addCustomers(@RequestBody List<Customer> customersToAdd) {
+
+        return customerService.insertCustomers(customersToAdd);
+
+    }
+
+    @DeleteMapping("/deleteCustomer")
+    public String deleteCustomer(@RequestBody JSONObject customerIdJSON) {
+
+        String customerIdToDelete = customerIdJSON.getAsString("customer_id");
+
+        return customerService.deleteCustomerById(customerIdToDelete);
+
+    }
+
+    @PutMapping("/updateCustomer")
+    public String updateCustomer(@RequestBody List<Customer> myCustomer) {
+
+        return customerService.updateCustomer(myCustomer);
+
+    }
+
 }
